@@ -22,4 +22,8 @@ Route::get('/home', function () {
 });
 
 
-Route::get('/contact',[ContactController::class,'index'])->middleware('age');
+Route::get('/contact',[ContactController::class,'index']);
+
+Route::get('about',function(){
+    return view('about');
+})->name('abt');
