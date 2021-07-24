@@ -9,10 +9,8 @@ class CategoryController extends Controller
 {
     //
     public function test(){
-       Category::insert([
-          'category_name'=>'Car',
-          'user_id'=>Auth::user()->id
-       ]);
+ 
+         return view('category.index');
 
     }
 }
