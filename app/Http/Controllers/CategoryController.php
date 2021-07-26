@@ -18,6 +18,8 @@ class CategoryController extends Controller
          
         $request->validate([
             'category_name'=>'required|max:255|unique:categories',
+        ],[
+            'category_name.required'=>'Plese  add Category Its mendetory',
         ]);
     
 
