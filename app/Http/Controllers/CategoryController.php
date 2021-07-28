@@ -34,6 +34,6 @@ class CategoryController extends Controller
         $category->category_name=$request->category_name;
         $category->user_id=Auth::user()->id;
         $category->save();
-
+     //try another methood
     } 
 }
