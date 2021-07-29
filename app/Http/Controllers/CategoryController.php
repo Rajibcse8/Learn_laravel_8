@@ -66,9 +66,13 @@ class CategoryController extends Controller
        ]
     );
 
-    $update=Category::find($id)->update([
-        'category_name'=>$req->category_name,
-    ]);
+    // $update=Category::find($id)->update([
+    //     'category_name'=>$req->category_name,
+    // ]);
+    $category=Category::find($id);
+    $category->category_name=$req->category_name;
+    $category->update();
+
 
     return Redirect()->route('all.category')->with('success', 'Data Update Successfully');
 
