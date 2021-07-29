@@ -9,13 +9,13 @@
                 <div class="col-md-8">
                     <div class="card">
 
-                      @if(session('success'))
-                          
-                      <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong>{{ session('success')   }}</strong>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                      </div>
-                      @endif
+                        @if (session('success'))
+
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>{{ session('success') }}</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        @endif
                         <div class="card-header">
                             All-Category
                         </div>
@@ -26,9 +26,29 @@
                                     <th scope="col">Category Name</th>
                                     <th scope="col">Created By</th>
                                     <th scope="col">Created At</th>
+
                                 </tr>
                             </thead>
                             <tbody>
+                                @php($i = 1)
+
+                                @foreach ($category as $cat)
+
+                                    <tr>
+                                        <td>{{ $i++ }}</td>
+                                        <td>{{ $cat->category_name }}</td>
+                                        <td>{{ $cat->user_id }}</td>
+                                        <td>
+                                            @if ($cat->created_at == null)
+                                                <span><strong> No Timestapm Found</strong></span>
+                                                @else{{ $cat->created_at->diffForHumans() }}
+
+                                            @endif
+                                        </td>
+                                    </tr>
+
+                                @endforeach
+
 
                             </tbody>
                         </table>
@@ -49,11 +69,11 @@
                                     <input type="text" class="form-control" name="category_name" id="category_name">
                                     @error('category_name')
 
-                                    <span class="text-danger">{{ $message }}</span>
-                                        
+                                        <span class="text-danger">{{ $message }}</span>
+
                                     @enderror
                                 </div>
-                                
+
                                 <button type="submit" class="btn btn-primary">Add category</button>
                             </form>
                         </div>

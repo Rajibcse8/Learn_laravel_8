@@ -12,8 +12,10 @@ class CategoryController extends Controller
 {
     //
     public function test(){
- 
-         return view('category.index');
+       
+        $category=Category::latest()->get();
+          
+         return view('category.index',compact('category'));
 
     }
 
@@ -26,21 +28,21 @@ class CategoryController extends Controller
         ]);
     
 
-        // Category::insert([
-        //     'category_name'=>$request->category_name,
-        //     'user_id'=>Auth::user()->id,
-        //     'created_at'=>Carbon::now(),
-        // ]);
+        Category::insert([
+            'category_name'=>$request->category_name,
+            'user_id'=>Auth::user()->id,
+            'created_at'=>Carbon::now(),
+        ]);
          
         // $category=  new Category;
         // $category->category_name=$request->category_name;
         // $category->user_id=Auth::user()->id;
         // $category->save();
 
-        $data=array();
-        $data['category_name']=$request->category_name;
-        $data['user_id']=Auth::user()->id;
-        DB::table('categories')->insert($data);
+        // $data=array();
+        // $data['category_name']=$request->category_name;
+        // $data['user_id']=Auth::user()->id;
+        // DB::table('categories')->insert($data);
    
         return Redirect()->back()->with('success','Categorry Added Successfully');
 
