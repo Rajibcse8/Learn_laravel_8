@@ -14,7 +14,7 @@ class CategoryController extends Controller
     public function test(){
        
         //$category=Category::latest()->get();
-         $category=DB::table('categories')->latest()->get(); 
+        $category=DB::table('categories')->latest()->paginate(5); 
          return view('category.index',compact('category'));
 
     }
