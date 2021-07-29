@@ -41,7 +41,7 @@
                                         <td>
                                             @if ($cat->created_at == null)
                                                 <span><strong> No Timestapm Found</strong></span>
-                                                @else{{ $cat->created_at->diffForHumans() }}
+                                                @else{{ Carbon\Carbon::parse($cat->created_at)->diffForHumans() }}
 
                                             @endif
                                         </td>
