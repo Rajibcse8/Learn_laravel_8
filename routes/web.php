@@ -33,5 +33,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::get('/category-add',[CategoryController::class,'test']);
+Route::get('/category-add',[CategoryController::class,'test'])->name('all.category');
 Route::post('category/store',[CategoryController::class,'store'])->name('categoty.store');
+Route::get('category/edit/{id}',[CategoryController::class,'edit']);
+Route::post('category/update/{id}',[CategoryController::class,'update']);

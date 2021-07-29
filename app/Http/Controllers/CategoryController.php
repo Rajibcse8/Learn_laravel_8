@@ -49,5 +49,28 @@ class CategoryController extends Controller
    
         return Redirect()->back()->with('success','Categorry Added Successfully');
 
-    } 
+    }
+    
+    public function edit($id){
+        $category=Category::find($id);
+        return view('category.edit',compact('category'));
+      
+    }
+
+    public function update(Request $req, $id){
+       $req->validate([
+           'category_name'=>'required|max:255|unique:categories',
+       ],
+       [
+           'category_name.required'=>'You Have to Add Name For Update Category Name',
+       ]
+    );
+
+    $update=Category::find($id)->update([
+        'category_name'=>$req->category_name,
+    ]);
+
+    return Redirect()->route('all.category')->with('success', 'Data Update Successfully');
+
+    }
 }

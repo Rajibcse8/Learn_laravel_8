@@ -26,6 +26,7 @@
                                     <th scope="col">Category Name</th>
                                     <th scope="col">Created By</th>
                                     <th scope="col">Created At</th>
+                                    <th scope="col">Action</th>
                                   
                                 </tr>
                             </thead>
@@ -44,6 +45,10 @@
                                      @else{{ Carbon\Carbon::parse($cat->created_at)->diffForHumans() }}
 
                                     @endif
+                                </td>
+                                <td>
+                                    <a href="{{ url('category/edit/'.$cat->id) }}" class="btn btn-info">Edit</a>
+                                    <a href="" class="btn btn-danger">Delete</a>
                                 </td>
                               </tr>
                                    
