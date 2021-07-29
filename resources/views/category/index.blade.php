@@ -37,7 +37,7 @@
                                <tr>
                                 <td>{{ $category->firstItem()+$loop->index }}</td>
                                 <td>{{ $cat->category_name }}</td>
-                                <td>{{ $cat->user_id }}</td>
+                                <td>{{ $cat->name }}</td>
                                 <td>
                                     @if($cat->created_at==null)
                                         <span><strong class="text text-danger"> No Timestapm Found</strong></span>
