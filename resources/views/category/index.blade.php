@@ -30,12 +30,12 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @php($i=1)
+                               
                                
                                @foreach ($category as $cat)
                                 
                                <tr>
-                                   <td>{{ $i++ }}</td>
+                                <td>{{ $category->firstItem()+$loop->index }}</td>
                                 <td>{{ $cat->category_name }}</td>
                                 <td>{{ $cat->user_id }}</td>
                                 <td>

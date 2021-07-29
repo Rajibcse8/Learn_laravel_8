@@ -13,8 +13,8 @@ class CategoryController extends Controller
     //
     public function test(){
        
-        //$category=Category::latest()->get();
-        $category=DB::table('categories')->latest()->paginate(5); 
+        $category=Category::latest()->paginate(5);
+        //$category=DB::table('categories')->latest()->paginate(5); 
          return view('category.index',compact('category'));
 
     }
