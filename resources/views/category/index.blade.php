@@ -9,13 +9,13 @@
                 <div class="col-md-8">
                     <div class="card">
 
-                      @if(session('success'))
-                          
-                      <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong>{{ session('success')   }}</strong>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                      </div>
-                      @endif
+                        @if (session('success'))
+
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>{{ session('success') }}</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        @endif
                         <div class="card-header">
                             All-Category
                         </div>
@@ -27,33 +27,34 @@
                                     <th scope="col">Created By</th>
                                     <th scope="col">Created At</th>
                                     <th scope="col">Action</th>
-                                  
+
                                 </tr>
                             </thead>
                             <tbody>
-                               
-                               
-                               @foreach ($category as $cat)
-                                
-                               <tr>
-                                <td>{{ $category->firstItem()+$loop->index }}</td>
-                                <td>{{ $cat->category_name }}</td>
-                                <td>{{ $cat->user->name }}</td>
-                                <td>
-                                    @if($cat->created_at==null)
-                                        <span><strong class="text text-danger"> No Timestapm Found</strong></span>
-                                     @else{{ Carbon\Carbon::parse($cat->created_at)->diffForHumans() }}
 
-                                    @endif
-                                </td>
-                                <td>
-                                    <a href="{{ url('category/edit/'.$cat->id) }}" class="btn btn-info">Edit</a>
-                                    <a href="" class="btn btn-danger">Delete</a>
-                                </td>
-                              </tr>
-                                   
-                               @endforeach
-                              
+
+                                @foreach ($category as $cat)
+
+                                    <tr>
+                                        <td>{{ $category->firstItem() + $loop->index }}</td>
+                                        <td>{{ $cat->category_name }}</td>
+                                        <td>{{ $cat->user->name }}</td>
+                                        <td>
+                                            @if ($cat->created_at == null)
+                                                <span><strong class="text text-danger"> No Timestapm Found</strong></span>
+                                                @else{{ Carbon\Carbon::parse($cat->created_at)->diffForHumans() }}
+
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <a href="{{ url('category/edit/' . $cat->id) }}" class="btn btn-info">Edit</a>
+                                            <a href="{{ url('category/delete/'.$cat->id) }}" class="btn btn-danger">Delete</a>
+                                            
+                                        </td>
+                                    </tr>
+
+                                @endforeach
+
                             </tbody>
                         </table>
                         {{ $category->links() }}
@@ -74,11 +75,11 @@
                                     <input type="text" class="form-control" name="category_name" id="category_name">
                                     @error('category_name')
 
-                                    <span class="text-danger">{{ $message }}</span>
-                                        
+                                        <span class="text-danger">{{ $message }}</span>
+
                                     @enderror
                                 </div>
-                                
+
                                 <button type="submit" class="btn btn-primary">Add category</button>
                             </form>
                         </div>
