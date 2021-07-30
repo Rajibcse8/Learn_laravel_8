@@ -52,7 +52,8 @@ class CategoryController extends Controller
     }
     
     public function edit($id){
-        $category=Category::find($id);
+        // $category=Category::find($id);
+        $category=DB::table('categories')->where('id',$id)->first();
         return view('category.edit',compact('category'));
       
     }
@@ -69,10 +70,13 @@ class CategoryController extends Controller
     // $update=Category::find($id)->update([
     //     'category_name'=>$req->category_name,
     // ]);
-    $category=Category::find($id);
-    $category->category_name=$req->category_name;
-    $category->update();
+    // $category=Category::find($id);
+    // $category->category_name=$req->category_name;
+    // $category->update();
 
+    $data=array();
+    $data['category_name']=$req->category_name;
+    DB::table('categories')->where('id',$id)->update($data);
 
     return Redirect()->route('all.category')->with('success', 'Data Update Successfully');
 
