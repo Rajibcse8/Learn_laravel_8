@@ -49,7 +49,10 @@
                                             {{ Carbon\Carbon::parse($brand->created_at)->diffForHumans() }}    
                                         @endif
                                     </td>
-                                    <td>EDIT AND UPDATE</td>
+                                    <td>
+                                        <a href="{{ url('brand/edit/'.$brand->id ) }}" class="btn btn-primary">Edit</a>
+                                        <a href=""class="btn btn-danger">Delete</a>
+                                    </td>
                                 </tr>
 
                                 @endforeach
