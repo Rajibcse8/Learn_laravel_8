@@ -88,8 +88,13 @@ class BrandController extends Controller
             return Redirect()->route('all.brand')->with('success','Brand Data Update SuccessFully');
 
         }
+    }
 
 
-
+    public function delete($id){
+        $brand=Brand::find($id);
+        unlink('image/brand/'.$brand->brand_image);
+        $brand->delete();
+        return Redirect()->back()->with('success','Brand data delete Succssfuly');
     }
 }
