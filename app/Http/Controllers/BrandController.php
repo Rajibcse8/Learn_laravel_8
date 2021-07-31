@@ -50,4 +50,9 @@ class BrandController extends Controller
         $brand=Brand::find($id);    
         return view('brand.edit',compact('brand'));
     }
+
+    public function update(Request $req, $id){
+      
+        
+    }
 }
