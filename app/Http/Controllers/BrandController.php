@@ -52,7 +52,44 @@ class BrandController extends Controller
     }
 
     public function update(Request $req, $id){
-      
-        
+       
+        $req->validate([
+            'brand_name'=>'required|min:3|unique:brands,brand_name,'.$id,
+            'brnad_image'=>'mimes:png,jpg,jpeg,gif',
+        ],[
+            'brand_name.required'=>'You  must have to Add brand name',
+            'brand_name.min'=>'Brand name Contains At least # character',
+            'brand_image.mimes'=>'this File is not supported Only image file is acceprtable',
+        ]);
+
+        if($req->brand_image){
+            unlink('image/brand/'.$req->old_image);
+            $brand_image=$req->brand_image;
+            $name_gen=hexdec(uniqid());
+            $img_ext=strtolower($brand_image->getClientOriginalExtension());
+            $img_name=$name_gen.'.'.$img_ext;
+            $brand_image->move('image/brand',$img_name);
+            
+            Brand::find($id)->update([
+                'brand_name'=>$req->brand_name,
+                'brand_image'=>$img_name,
+                'created_at'=>Carbon::now(),
+            ]);
+
+            return Redirect()->route('all.brand')->with('success','Brand Data Update SuccessFully');
+
+
+        }
+        else{
+            Brand::find($id)->update([
+                'brand_name'=>$req->brand_name,
+            ]);
+
+            return Redirect()->route('all.brand')->with('success','Brand Data Update SuccessFully');
+
+        }
+
+
+
     }
 }
