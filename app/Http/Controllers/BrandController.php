@@ -10,8 +10,8 @@ use Illuminate\Support\Facades\Db;
 class BrandController extends Controller
 {
     public function index(){
-        //$brand= Brand::latest()->paginate(5);
-        return view('brand.index');
+        $allbrand= Brand::latest()->paginate(5);
+        return view('brand.index',compact('allbrand'));
     }
 
     public function store(Request  $req){
@@ -40,6 +40,7 @@ class BrandController extends Controller
          'brand_name'=>$req->brand_name,
          'user_id'=>Auth::user()->id,
          'brand_image'=>$img_name,
+         'created_at'=>Carbon::now(),
      ]);
       return Redirect()->back()->with('success', 'Brand Data added Successfully');
     }

@@ -34,12 +34,29 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                   @foreach ($allbrand as $brand)
+                                       
+                                 
+                                <tr>
+                                    <td>{{ $allbrand->firstItem()+$loop->index }}</td>
+                                    <td>{{ $brand->brand_name }}</td>
+                                    <td><img src="{{ asset('image/brand/'.$brand->brand_image) }}" alt="" style="height:40px; width:40px;"></td>
+                                    <td>{{ $brand->user->name }}</td>
+                                    <td>
+                                        @if($brand->created_at==null)
+                                            <span class="text text-danger">No Timestamp Set</span>
+                                        @else
+                                            {{ Carbon\Carbon::parse($brand->created_at)->diffForHumans() }}    
+                                        @endif
+                                    </td>
+                                    <td>EDIT AND UPDATE</td>
+                                </tr>
 
-
-                            
+                                @endforeach
 
                             </tbody>
                         </table>
+                        {{ $allbrand->links() }}
                       
 
                     </div>
