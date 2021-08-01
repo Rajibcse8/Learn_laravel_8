@@ -6,6 +6,7 @@ use App\Models\Brand;
 use Auth;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Db;
+use Image;
 
 class BrandController extends Controller
 {
@@ -34,7 +35,8 @@ class BrandController extends Controller
      $img_ext=strtolower($brand_image->getClientOriginalExtension());
      $up_location='image/brand';
      $img_name=$name_gen.'.'.$img_ext;
-     $brand_image->move($up_location,$img_name);
+     //$brand_image->move($up_location,$img_name);
+     Image::make($brand_image)->resize(300,200)->save('image/brand/'.$img_name);
 
      Brand::insert([
          'brand_name'=>$req->brand_name,
@@ -63,13 +65,14 @@ class BrandController extends Controller
         ]);
 
         if($req->brand_image){
+            
             unlink('image/brand/'.$req->old_image);
             $brand_image=$req->brand_image;
             $name_gen=hexdec(uniqid());
             $img_ext=strtolower($brand_image->getClientOriginalExtension());
             $img_name=$name_gen.'.'.$img_ext;
-            $brand_image->move('image/brand',$img_name);
-            
+            //$brand_image->move('image/brand',$img_name);
+            Image::make($brand_image)->resize(300,200)->save('image/brand/'.$img_name);
             Brand::find($id)->update([
                 'brand_name'=>$req->brand_name,
                 'brand_image'=>$img_name,
