@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Brand;
+use App\Models\Multipic;
 use Auth;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Db;
@@ -99,5 +100,13 @@ class BrandController extends Controller
         unlink('image/brand/'.$brand->brand_image);
         $brand->delete();
         return Redirect()->back()->with('success','Brand data delete Succssfuly');
+    }
+
+    //---------------------multipic---------------------------------------------------
+
+    public function multipic(){
+
+        $image=Multipic::all();
+        return view('brand.multipicindex',compact('image'));
     }
 }
