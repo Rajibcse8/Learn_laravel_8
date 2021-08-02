@@ -15,29 +15,18 @@
 
             <div class="row">
                 <div class="col-md-8">
-                    <div class="card">
+                    <div class="card-group">
 
-                
-                        <div class="card-header">
-                            All-Picture
-                        </div>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                 
+               @foreach ($image as $multi)
+               <div class="col-md-4 mt-5">
+                   <div class="card">
+                       <img src="{{ asset('image/multipic/'.$multi->image) }}" alt="">
+                   </div>
 
-                                </tr>
-                            </thead>
-                            <tbody>
-                                  
-                                       
-                                 
-                               
-
-                             
-
-                            </tbody>
-                        </table>
+               </div>
+                   
+               @endforeach
+                        
                  
                       
 
