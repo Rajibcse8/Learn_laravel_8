@@ -109,4 +109,27 @@ class BrandController extends Controller
         $image=Multipic::all();
         return view('brand.multipicindex',compact('image'));
     }
+
+    public  function multipicstore(Request $req){
+         
+        $req->validate([
+            'multi_image' => 'required',
+            'multi_image.*' => 'image',
+        ]);
+        
+
+        foreach($req->file('multi_image')  as $image){
+           
+            $image_name=hexdec(uniqid()).'.'.strtolower($image->getClientOriginalExtension());
+            Image::make($image)->resize(400,300)->save('image/multipic/'.$image_name);
+            Multipic::insert([
+                'image'=>$image_name,
+                'created_at'=>Carbon::now(),
+            ]);
+           
+        }
+        return Redirect()->back()->with('success','Image added Successfully');
+
+  }
+
 }

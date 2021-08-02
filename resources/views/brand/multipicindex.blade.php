@@ -50,13 +50,13 @@
                            MultiPic ADD
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('brand.store') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('multiImage.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                
                                 <div class="form-group">
                                     <label for="Brand_name">Brand iamge</label>
-                                    <input type="file" class="form-control" name="brand_image" id="Brand_name">
-                                    @error('brand_image')
+                                    <input type="file" class="form-control" name="multi_image[]"  multiple="">
+                                    @error('multi_image')
                                          <span><strong class="tect text-danger">{{ $message }}</strong></span>
                                     @enderror
                                 </div>
